@@ -1,0 +1,486 @@
+// ============================================
+// GLOBAL THEME VARIABLES & UTILITIES
+// ============================================
+
+// --- COLOR PALETTE ---
+$color-bg-primary: #0f172a;
+$color-bg-dark: #0A0A0F;
+$color-emerald: #10b981;
+$color-emerald-light: #6ee7b7;
+$color-blue: #3b82f6;
+$color-blue-light: #60a5fa;
+$color-white: #ffffff;
+$color-slate-950: #020617;
+$color-slate-900: #0f172a;
+$color-slate-800: #1e293b;
+$color-slate-700: #334155;
+$color-slate-600: #475569;
+$color-slate-500: #64748b;
+$color-slate-200: #e2e8f0;
+$color-slate-100: #f1f5f9;
+$color-slate-50: #f8fafc;
+$color-red: #ef4444;
+$color-yellow: #f59e0b;
+$color-green: #22c55e;
+
+// --- SPACING SCALE ---
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+$spacing-4xl: 6rem;
+
+// --- BORDER RADIUS ---
+$border-radius-sm: 0.5rem;
+$border-radius-md: 0.75rem;
+$border-radius-lg: 1.5rem;
+$border-radius-xl: 2.5rem;
+$border-radius-2xl: 3rem;
+$border-radius-full: 9999px;
+
+// --- SHADOWS ---
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+$shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+$shadow-glow-emerald: 0 0 80px -10px rgba(16, 185, 129, 0.5);
+$shadow-glow-blue: 0 0 80px -10px rgba(59, 130, 246, 0.5);
+
+// --- TRANSITIONS ---
+$transition-fast: 0.15s ease-in-out;
+$transition-base: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-out;
+$transition-slower: 0.8s ease-out;
+
+// --- FONT WEIGHTS ---
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$font-extrabold: 800;
+$font-black: 900;
+
+// --- Z-INDEX SCALE ---
+$z-base: 0;
+$z-background: 1;
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-fixed: 300;
+$z-floating: 400;
+$z-modal-backdrop: 500;
+$z-modal: 600;
+$z-popover: 700;
+$z-tooltip: 800;
+
+// --- BREAKPOINTS ---
+$bp-xs: 320px;
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
+
+// ============================================
+// MIXINS
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin grid-center {
+  display: grid;
+  place-items: center;
+}
+
+@mixin gradient-text($from-color, $to-color) {
+  background: linear-gradient(to bottom, $from-color, $to-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin text-truncate($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@mixin button-base {
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-lg;
+  font-weight: $font-black;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin glow-effect($color, $size: 80px, $intensity: 0.5) {
+  box-shadow: 0 0 $size -10px rgba($color, $intensity);
+}
+
+@mixin smooth-transition($props: all, $duration: $transition-base) {
+  transition: $props $duration;
+}
+
+@mixin card-base {
+  background-color: rgba($color-white, 0.05);
+  border: 1px solid rgba($color-white, 0.1);
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  backdrop-filter: blur(10px);
+  transition: all $transition-base;
+
+  &:hover {
+    background-color: rgba($color-white, 0.08);
+    border-color: rgba($color-white, 0.2);
+  }
+}
+
+@mixin card-dark {
+  background-color: rgba($color-slate-900, 0.6);
+  border: 1px solid rgba($color-emerald, 0.1);
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  transition: all $transition-base;
+
+  &:hover {
+    background-color: rgba($color-slate-900, 0.8);
+    border-color: rgba($color-emerald, 0.3);
+  }
+}
+
+@mixin responsive-padding($mobile: $spacing-md, $tablet: $spacing-lg, $desktop: $spacing-xl) {
+  padding: $mobile;
+
+  @media (min-width: $bp-md) {
+    padding: $tablet;
+  }
+
+  @media (min-width: $bp-lg) {
+    padding: $desktop;
+  }
+}
+
+@mixin responsive-text($mobile, $tablet, $desktop) {
+  font-size: $mobile;
+
+  @media (min-width: $bp-md) {
+    font-size: $tablet;
+  }
+
+  @media (min-width: $bp-lg) {
+    font-size: $desktop;
+  }
+}
+
+@mixin animated-gradient-border {
+  position: relative;
+  background: $color-bg-primary;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, $color-emerald, $color-blue, $color-emerald);
+    background-size: 300% 300%;
+    border-radius: inherit;
+    animation: gradient-shift 3s ease infinite;
+    z-index: -1;
+  }
+}
+
+@mixin focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+
+  &:focus {
+    outline: 2px solid $color-emerald;
+    outline-offset: 2px;
+  }
+}
+
+// ============================================
+// KEYFRAME ANIMATIONS
+// ============================================
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes bounce-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+.blur-glass {
+  background: rgba($color-bg-dark, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba($color-white, 0.1);
+}
+
+.gradient-text-primary {
+  @include gradient-text($color-emerald-light, $color-blue-light);
+}
+
+.gradient-text-white {
+  @include gradient-text($color-white, rgba($color-white, 0.4));
+}
+
+.glow-emerald {
+  @include glow-effect($color-emerald, 100px, 0.5);
+}
+
+.glow-blue {
+  @include glow-effect($color-blue, 100px, 0.5);
+}
+
+.text-truncate-1 {
+  @include text-truncate(1);
+}
+
+.text-truncate-2 {
+  @include text-truncate(2);
+}
+
+.text-truncate-3 {
+  @include text-truncate(3);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba($color-emerald, 0.3) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color-emerald, 0.3);
+    border-radius: $border-radius-full;
+
+    &:hover {
+      background: rgba($color-emerald, 0.5);
+    }
+  }
+}
+
+// ============================================
+// GLOBAL ELEMENT STYLES
+// ============================================
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+button {
+  @include focus-ring;
+}
+
+input,
+textarea,
+select {
+  @include focus-ring;
+}
+
+// ============================================
+// THEME BACKGROUND ANIMATIONS
+// ============================================
+
+.animated-background {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 50%, rgba($color-emerald, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba($color-blue, 0.1) 0%, transparent 50%);
+    animation: drift 20s ease-in-out infinite;
+    z-index: $z-background;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(30px, -30px);
+  }
+
+  50% {
+    transform: translate(-30px, 30px);
+  }
+
+  75% {
+    transform: translate(30px, 30px);
+  }
+}

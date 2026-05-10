@@ -1,0 +1,352 @@
+// ============================================
+// RESULTS PAGE STYLES
+// ============================================
+
+@use './global.scss' as *;
+
+.results-container {
+  min-height: 100vh;
+  background-color: $color-bg-primary;
+  color: $color-white;
+  font-family: sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 6rem;
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: $z-background;
+
+    &-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.05;
+
+      &--emerald {
+        top: 0;
+        left: -30%;
+        width: 60%;
+        height: 60%;
+        background-color: $color-emerald;
+      }
+
+      &--blue {
+        bottom: 0;
+        right: -30%;
+        width: 60%;
+        height: 60%;
+        background-color: $color-blue;
+      }
+    }
+  }
+
+  &__header {
+    position: relative;
+    z-index: $z-fixed;
+    padding: $spacing-lg $spacing-md;
+    border-bottom: 1px solid rgba($color-emerald, 0.1);
+    background: rgba($color-bg-dark, 0.3);
+    backdrop-filter: blur(10px);
+
+    @media (min-width: $bp-md) {
+      padding: $spacing-xl $spacing-lg;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: $z-base;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: $spacing-2xl $spacing-md;
+
+    @media (min-width: $bp-md) {
+      padding: $spacing-3xl $spacing-lg;
+    }
+  }
+}
+
+// --- HEADER TITLE ---
+.results-title {
+  font-size: 2.25rem;
+  font-weight: $font-black;
+  margin: 0;
+  letter-spacing: -0.02em;
+  @include gradient-text($color-emerald-light, $color-blue-light);
+
+  @media (max-width: $bp-sm) {
+    font-size: 1.5rem;
+  }
+}
+
+// --- STATS BAR ---
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-lg;
+  margin-bottom: $spacing-3xl;
+
+  &__item {
+    @include card-base;
+    @include flex-column;
+    gap: $spacing-sm;
+
+    &-label {
+      font-size: 0.875rem;
+      font-weight: $font-semibold;
+      color: rgba($color-white, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    &-value {
+      font-size: 2rem;
+      font-weight: $font-black;
+      color: $color-emerald;
+      line-height: 1;
+    }
+  }
+}
+
+// --- RESULTS GRID ---
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-xl;
+  margin-bottom: $spacing-3xl;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// --- RESULT CARD ---
+.result-card {
+  @include card-dark;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba($color-emerald, 0.1), transparent);
+    transition: left $transition-base;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba($color-emerald, 0.5);
+  }
+
+  &__photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-lg;
+    border: 2px solid rgba($color-emerald, 0.2);
+  }
+
+  &__info {
+    @include flex-column;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__name {
+    font-size: 1.25rem;
+    font-weight: $font-bold;
+    color: $color-white;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  &__party {
+    font-size: 0.875rem;
+    color: $color-emerald;
+    font-weight: $font-semibold;
+  }
+
+  &__votes {
+    background: linear-gradient(135deg, rgba($color-emerald, 0.2), rgba($color-blue, 0.2));
+    padding: $spacing-lg;
+    border-radius: $border-radius-md;
+    text-align: center;
+    border: 1px solid rgba($color-emerald, 0.3);
+
+    &-label {
+      font-size: 0.75rem;
+      color: rgba($color-white, 0.5);
+      text-transform: uppercase;
+      margin-bottom: $spacing-sm;
+    }
+
+    &-number {
+      font-size: 2rem;
+      font-weight: $font-black;
+      color: $color-emerald;
+      line-height: 1;
+    }
+  }
+
+  &__bar {
+    width: 100%;
+    height: 8px;
+    background: rgba($color-white, 0.1);
+    border-radius: $border-radius-full;
+    overflow: hidden;
+    margin-top: $spacing-md;
+
+    &-fill {
+      height: 100%;
+      background: linear-gradient(90deg, $color-emerald, $color-emerald-light);
+      width: 0%;
+      transition: width 0.8s ease-out;
+      border-radius: $border-radius-full;
+    }
+  }
+}
+
+// --- CHARTS SECTION ---
+.results-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: $spacing-xl;
+  margin-bottom: $spacing-3xl;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+  }
+
+  &__card {
+    @include card-dark;
+    @include flex-column;
+    gap: $spacing-lg;
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: $font-bold;
+      color: $color-white;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+// --- BLOCKCHAIN SECTION ---
+.blockchain-section {
+  @include card-dark;
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: $font-black;
+    color: $color-white;
+    margin: 0 0 $spacing-lg 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// --- BLOCKCHAIN TABLE ---
+.blockchain-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+
+  &__header {
+    background: rgba($color-emerald, 0.1);
+    border-bottom: 2px solid rgba($color-emerald, 0.3);
+  }
+
+  &__th {
+    padding: $spacing-md $spacing-lg;
+    text-align: left;
+    font-weight: $font-bold;
+    color: $color-emerald;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  &__row {
+    border-bottom: 1px solid rgba($color-white, 0.05);
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba($color-emerald, 0.05);
+    }
+  }
+
+  &__td {
+    padding: $spacing-md $spacing-lg;
+    color: rgba($color-white, 0.8);
+
+    &--hash {
+      font-family: monospace;
+      font-size: 0.75rem;
+      @include text-truncate(1);
+      max-width: 200px;
+    }
+  }
+}
+
+// --- NO RESULTS STATE ---
+.results-empty {
+  @include flex-column;
+  @include grid-center;
+  gap: $spacing-lg;
+  padding: $spacing-3xl $spacing-lg;
+  text-align: center;
+  color: rgba($color-white, 0.5);
+
+  svg {
+    width: 4rem;
+    height: 4rem;
+    opacity: 0.3;
+  }
+
+  p {
+    font-size: 1.125rem;
+    font-weight: $font-semibold;
+    margin: 0;
+  }
+}
+
+// --- RESPONSIVE ---
+@media (max-width: $bp-sm) {
+  .results-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .blockchain-table {
+    &__th,
+    &__td {
+      padding: $spacing-sm $spacing-md;
+      font-size: 0.75rem;
+    }
+  }
+}

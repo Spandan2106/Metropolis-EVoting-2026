@@ -1,0 +1,420 @@
+// ============================================
+// LANDING PAGE STYLES - SASS/SCSS
+// ============================================
+
+// --- VARIABLES ---
+$color-bg-primary: #0f172a;
+$color-bg-dark: #0A0A0F;
+$color-emerald: #10b981;
+$color-blue: #3b82f6;
+$color-white: #ffffff;
+$color-slate-950: #020617;
+$color-slate-200: #e2e8f0;
+$color-slate-50: #f8fafc;
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+
+$border-radius-sm: 0.75rem;
+$border-radius-md: 1.5rem;
+$border-radius-lg: 2.5rem;
+$border-radius-xl: 3rem;
+
+$shadow-light: 0 10px 25px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 20px 40px rgba(0, 0, 0, 0.2);
+$shadow-heavy: 0 30px 60px rgba(0, 0, 0, 0.3);
+$shadow-glow-emerald: 0 0 100px -10px rgba(16, 185, 129, 0.5);
+
+$transition-fast: 0.2s ease-in-out;
+$transition-base: 0.3s ease-in-out;
+$transition-slow: 0.8s ease-out;
+
+$font-black: 900;
+$font-bold: 700;
+$font-semibold: 600;
+$font-medium: 500;
+
+$z-background: 1;
+$z-content: 10;
+$z-floating: 500;
+
+// --- MIXINS ---
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin text-gradient($from-color, $to-color) {
+  background: linear-gradient(to bottom, $from-color, $to-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin button-base {
+  padding: $spacing-xl;
+  border-radius: $border-radius-lg;
+  font-weight: $font-black;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  font-family: sans-serif;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+@mixin glow-effect($color, $size: 80px, $intensity: 0.5) {
+  box-shadow: 0 0 $size -10px rgba($color, $intensity);
+}
+
+@mixin animate-pulse-delay($delay) {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation-delay: $delay;
+}
+
+@mixin gradient-text($start: #fff, $end: rgba(#fff, 0.4)) {
+  @include text-gradient($start, $end);
+}
+
+@mixin smooth-transition($props: all, $duration: $transition-base) {
+  transition: $props $duration;
+}
+
+@mixin responsive-padding {
+  padding: $spacing-md;
+
+  @media (min-width: 768px) {
+    padding: $spacing-lg;
+  }
+}
+
+@mixin responsive-text($mobile, $desktop) {
+  font-size: $mobile;
+
+  @media (min-width: 768px) {
+    font-size: $desktop;
+  }
+}
+
+// --- ANIMATIONS ---
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes bounce-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.8) rotate(-12deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) rotate(12deg);
+    opacity: 1;
+  }
+}
+
+// --- MAIN LANDING PAGE CONTAINER ---
+.landing-container {
+  min-height: 100vh;
+  background-color: $color-bg-primary;
+  @include flex-column;
+  align-items: center;
+  justify-content: center;
+  @include responsive-padding;
+  color: $color-white;
+  text-align: center;
+  font-family: sans-serif;
+  overflow: hidden;
+  position: relative;
+
+  // Background decorations
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: $z-background;
+
+    &-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.1;
+
+      &--emerald {
+        top: -10%;
+        left: -10%;
+        width: 40%;
+        height: 40%;
+        background-color: $color-emerald;
+        @include animate-pulse-delay(0s);
+      }
+
+      &--blue {
+        bottom: -10%;
+        right: -10%;
+        width: 40%;
+        height: 40%;
+        background-color: $color-blue;
+        @include animate-pulse-delay(0.7s);
+      }
+    }
+
+    &-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image: radial-gradient($color-white 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+  }
+
+  // Main content wrapper
+  &__content {
+    max-width: 48rem;
+    width: 100%;
+    z-index: $z-content;
+    @include flex-column;
+    gap: $spacing-2xl;
+  }
+}
+
+// --- HEADER SECTION ---
+.landing-header {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-lg;
+
+  &__icon-wrapper {
+    width: 7rem;
+    height: 7rem;
+    background-color: $color-emerald;
+    border-radius: $border-radius-lg;
+    @include flex-center;
+    margin-bottom: $spacing-xl;
+    @include glow-effect($color-emerald, 100px, 0.5);
+    animation: scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 100px -10px rgba(16, 185, 129, 0.5);
+
+    svg {
+      width: 3.5rem;
+      height: 3.5rem;
+      color: $color-slate-950;
+      transform: rotate(-12deg);
+    }
+  }
+
+  &__title {
+    @include responsive-text(2.25rem, 4rem);
+    font-weight: $font-black;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: $spacing-md;
+    @include gradient-text;
+  }
+
+  &__subtitle {
+    color: $color-emerald;
+    letter-spacing: 0.05em;
+    font-weight: $font-black;
+    @include responsive-text(10px, 12px);
+    text-transform: uppercase;
+  }
+}
+
+// --- BUTTONS GRID ---
+.landing-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  &__button {
+    @include button-base;
+    @include smooth-transition;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--primary {
+      background-color: $color-white;
+      color: $color-slate-950;
+      box-shadow: $shadow-heavy;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: $color-emerald;
+        transform: translateY(100%);
+        transition: transform $transition-base;
+        z-index: -1;
+      }
+
+      &:hover::before {
+        transform: translateY(0);
+      }
+
+      &:hover {
+        color: $color-white;
+      }
+    }
+
+    &--secondary {
+      background-color: rgba($color-white, 0.05);
+      border: 1px solid rgba($color-white, 0.1);
+      color: $color-white;
+
+      &:hover {
+        background-color: rgba($color-white, 0.1);
+        border-color: rgba($color-white, 0.2);
+      }
+    }
+  }
+}
+
+// --- FOOTER STATUS ---
+.landing-footer {
+  @include flex-column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: $spacing-2xl;
+
+  &__status {
+    font-size: 10px;
+    font-family: monospace;
+    color: rgba($color-white, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    @include flex-center;
+    gap: $spacing-md;
+
+    svg {
+      width: 12px;
+      height: 12px;
+      animation: spin 2s linear infinite;
+    }
+  }
+
+  &__sync-dots {
+    @include flex-center;
+    gap: 0.5rem;
+
+    .sync-dot {
+      width: 0.25rem;
+      height: 0.25rem;
+      border-radius: 50%;
+      background-color: rgba($color-emerald, 0.4);
+      animation: bounce-pulse 1.4s infinite;
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.1}s;
+        }
+      }
+    }
+  }
+}
+
+// --- RESPONSIVE ADJUSTMENTS ---
+@media (max-width: 640px) {
+  .landing-buttons {
+    grid-template-columns: 1fr;
+
+    &__button {
+      padding: $spacing-lg;
+      font-size: 1rem;
+    }
+  }
+
+  .landing-header__title {
+    font-size: 2rem;
+  }
+}
+
+// --- UTILITY ANIMATIONS ---
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// --- MOTION/FRAMER MOTION COMPATIBILITY ---
+// These ensure smooth transitions with Framer Motion
+.motion-fade-in {
+  animation: float-up $transition-slow ease-out;
+}
+
+.motion-scale-in {
+  animation: scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

@@ -1,0 +1,482 @@
+// ============================================
+// ADMIN PAGE STYLES
+// ============================================
+
+@use './global.scss' as *;
+
+.admin-container {
+  min-height: 100vh;
+  background-color: $color-bg-primary;
+  color: $color-white;
+  font-family: sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 6rem;
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: $z-background;
+
+    &-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.05;
+
+      &--emerald {
+        top: -30%;
+        left: 0;
+        width: 50%;
+        height: 50%;
+        background-color: $color-emerald;
+      }
+
+      &--blue {
+        bottom: -30%;
+        right: 0;
+        width: 50%;
+        height: 50%;
+        background-color: $color-blue;
+      }
+    }
+  }
+
+  &__header {
+    position: relative;
+    z-index: $z-fixed;
+    padding: $spacing-lg $spacing-md;
+    border-bottom: 1px solid rgba($color-emerald, 0.15);
+    background: rgba($color-bg-dark, 0.4);
+    backdrop-filter: blur(10px);
+
+    @media (min-width: $bp-md) {
+      padding: $spacing-xl $spacing-lg;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: $z-base;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: $spacing-2xl $spacing-md;
+
+    @media (min-width: $bp-md) {
+      padding: $spacing-3xl $spacing-lg;
+    }
+  }
+}
+
+// --- ADMIN HEADER ---
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+
+  &__title {
+    font-size: 2rem;
+    font-weight: $font-black;
+    margin: 0;
+    letter-spacing: -0.02em;
+    @include gradient-text($color-emerald-light, $color-blue-light);
+
+    @media (max-width: $bp-sm) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__badge {
+    background: linear-gradient(135deg, rgba($color-emerald, 0.3), rgba($color-blue, 0.3));
+    border: 1px solid rgba($color-emerald, 0.5);
+    color: $color-emerald;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-full;
+    font-size: 0.75rem;
+    font-weight: $font-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// --- ADMIN CONTROLS ---
+.admin-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-lg;
+  margin-bottom: $spacing-3xl;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// --- CONTROL BUTTON ---
+.control-btn {
+  @include button-base;
+  width: 100%;
+  padding: $spacing-lg;
+  border-radius: $border-radius-lg;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  position: relative;
+  overflow: hidden;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &--danger {
+    background: linear-gradient(135deg, rgba($color-red, 0.2), rgba($color-red, 0.1));
+    border: 1px solid rgba($color-red, 0.3);
+    color: #fca5a5;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, rgba($color-red, 0.3), rgba($color-red, 0.2));
+      border-color: rgba($color-red, 0.5);
+      box-shadow: 0 0 30px rgba($color-red, 0.2);
+    }
+  }
+
+  &--success {
+    background: linear-gradient(135deg, rgba($color-emerald, 0.2), rgba($color-emerald, 0.1));
+    border: 1px solid rgba($color-emerald, 0.3);
+    color: $color-emerald;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, rgba($color-emerald, 0.3), rgba($color-emerald, 0.2));
+      border-color: rgba($color-emerald, 0.5);
+      box-shadow: 0 0 30px rgba($color-emerald, 0.2);
+    }
+  }
+
+  &--primary {
+    background: linear-gradient(135deg, rgba($color-blue, 0.2), rgba($color-blue, 0.1));
+    border: 1px solid rgba($color-blue, 0.3);
+    color: $color-blue-light;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, rgba($color-blue, 0.3), rgba($color-blue, 0.2));
+      border-color: rgba($color-blue, 0.5);
+      box-shadow: 0 0 30px rgba($color-blue, 0.2);
+    }
+  }
+}
+
+// --- STATS DASHBOARD ---
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-lg;
+  margin-bottom: $spacing-3xl;
+
+  &__card {
+    @include card-dark;
+    @include flex-column;
+    gap: $spacing-md;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, $color-emerald, $color-blue);
+      border-radius: $border-radius-full;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      font-weight: $font-semibold;
+      color: rgba($color-white, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+
+    .stat-value {
+      font-size: 2.25rem;
+      font-weight: $font-black;
+      color: $color-emerald;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .stat-change {
+      font-size: 0.75rem;
+      color: rgba($color-white, 0.5);
+      margin: 0;
+    }
+  }
+}
+
+// --- CHARTS GRID ---
+.admin-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: $spacing-xl;
+  margin-bottom: $spacing-3xl;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+  }
+
+  &__card {
+    @include card-dark;
+    @include flex-column;
+    gap: $spacing-lg;
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: $font-bold;
+      color: $color-white;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+// --- AUDIT LOG ---
+.audit-log {
+  @include card-dark;
+
+  &__header {
+    font-size: 1.25rem;
+    font-weight: $font-black;
+    color: $color-white;
+    margin: 0 0 $spacing-lg 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__list {
+    @include flex-column;
+    gap: $spacing-md;
+    max-height: 600px;
+    overflow-y: auto;
+
+    @media (max-width: $bp-md) {
+      max-height: 400px;
+    }
+  }
+
+  &__entry {
+    padding: $spacing-lg;
+    background: rgba($color-white, 0.03);
+    border-left: 3px solid transparent;
+    border-radius: $border-radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-white, 0.06);
+    }
+
+    &--info {
+      border-left-color: $color-blue;
+    }
+
+    &--warning {
+      border-left-color: $color-yellow;
+    }
+
+    &--danger {
+      border-left-color: $color-red;
+    }
+
+    &-time {
+      font-size: 0.75rem;
+      color: rgba($color-white, 0.4);
+      font-family: monospace;
+      margin-bottom: $spacing-sm;
+    }
+
+    &-action {
+      font-weight: $font-bold;
+      color: $color-white;
+      margin-bottom: $spacing-xs;
+    }
+
+    &-details {
+      font-size: 0.875rem;
+      color: rgba($color-white, 0.6);
+      line-height: 1.5;
+    }
+  }
+}
+
+// --- CANDIDATES MANAGEMENT ---
+.candidates-section {
+  @include card-dark;
+
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid rgba($color-emerald, 0.1);
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: $font-black;
+      color: $color-white;
+      margin: 0;
+      text-transform: uppercase;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: $spacing-lg;
+
+    @media (max-width: $bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $bp-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// --- CANDIDATE ITEM ---
+.candidate-item {
+  background: rgba($color-white, 0.02);
+  border: 1px solid rgba($color-emerald, 0.1);
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: rgba($color-emerald, 0.3);
+    background: rgba($color-white, 0.05);
+  }
+
+  &__photo {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-md;
+    border: 2px solid rgba($color-emerald, 0.2);
+  }
+
+  &__name {
+    font-weight: $font-bold;
+    color: $color-white;
+    margin: 0 0 $spacing-xs 0;
+    font-size: 1rem;
+  }
+
+  &__party {
+    color: $color-emerald;
+    font-size: 0.875rem;
+    margin: 0 0 $spacing-md 0;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+
+    button {
+      flex: 1;
+      padding: $spacing-sm $spacing-md;
+      font-size: 0.75rem;
+      border-radius: $border-radius-md;
+    }
+  }
+}
+
+// --- MODAL DIALOG ---
+.admin-modal {
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: $z-modal-backdrop;
+  }
+
+  &__dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $color-bg-dark;
+    border: 1px solid rgba($color-emerald, 0.2);
+    border-radius: $border-radius-2xl;
+    padding: $spacing-2xl;
+    max-width: 500px;
+    width: 90%;
+    z-index: $z-modal;
+    animation: scale-in 0.3s ease-out;
+
+    @media (max-width: $bp-sm) {
+      padding: $spacing-xl;
+      max-width: 90%;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: $font-black;
+    color: $color-white;
+    margin: 0 0 $spacing-lg 0;
+  }
+
+  &__body {
+    margin-bottom: $spacing-lg;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-md;
+    justify-content: flex-end;
+
+    button {
+      padding: $spacing-md $spacing-lg;
+      border-radius: $border-radius-lg;
+      font-weight: $font-bold;
+      cursor: pointer;
+    }
+  }
+}
+
+// --- RESPONSIVE ---
+@media (max-width: $bp-sm) {
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__title {
+      width: 100%;
+    }
+  }
+
+  .admin-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-charts {
+    grid-template-columns: 1fr;
+  }
+}
