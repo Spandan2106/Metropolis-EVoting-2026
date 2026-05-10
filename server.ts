@@ -350,7 +350,7 @@ async function startServer() {
   });
   app.use('/api/', limiter);
 
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
 
   // Routes
   app.post('/api/login', async (req, res) => {
