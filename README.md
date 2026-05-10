@@ -99,9 +99,9 @@ Render is highly recommended because it supports **Server-Sent Events (SSE)** an
 4. Connect your GitHub repository.
 5. **Runtime**: Node
 6. **Build Command**: `npm install && npm run build`
-7. **Start Command**: `npm run start` (Ensure this points to your compiled `dist/server.js`)
+7. **Start Command**: `npm run start`
 8. **Environment Variables**: Go to the **Environment** tab and add `MONGODB_URI`.
-9. **Retrieve Link**: Once the deployment starts, the live URL is displayed at the **top of your Render dashboard** under the service name (e.g., `https://metropolis-evoting.onrender.com`).
+9. **Retrieve Link**: The live URL is displayed at the **top of your Render dashboard** (e.g., `https://metropolis-evoting-2026.onrender.com`).
 10. **Wait for Green**: The link becomes active once the status changes to "Live" in the deployment logs.
 
 ### Vercel
