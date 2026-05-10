@@ -100,7 +100,9 @@ Render is highly recommended because it supports **Server-Sent Events (SSE)** an
 5. **Runtime**: Node
 6. **Build Command**: `npm install && npm run build`
 7. **Start Command**: `npm run start`
-8. **Environment Variables**: Go to the **Environment** tab and add `MONGODB_URI`.
+8. **Environment Variables**: Go to the **Environment** tab and add:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string.
+   - `NODE_ENV`: Set this to `production`.
 9. **Retrieve Link**: The live URL is displayed at the **top of your Render dashboard** (e.g., `https://metropolis-evoting-2026.onrender.com`).
 10. **Wait for Green**: The link becomes active once the status changes to "Live" in the deployment logs.
 
