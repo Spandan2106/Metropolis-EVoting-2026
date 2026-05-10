@@ -155,6 +155,11 @@ const seedDatabase = async () => {
     await NotificationModel.deleteMany({}); // Clear notifications too
   }
 
+  // Seed eligible voters setting
+  if (forceReseed || !(await SettingsModel.findOne({ key: 'eligibleVoters' }))) {
+    await setSetting('eligibleVoters', 6000000);
+  }
+
   // Seed initial notifications if empty
   const notifCount = await NotificationModel.countDocuments();
   if (notifCount === 0) {
@@ -492,6 +497,7 @@ async function startServer() {
   app.get('/api/admin/stats', async (req, res) => {
     // Return cached stats if available to handle 1000+ concurrent admin views
     if (statsCache) return res.json(statsCache);
+    const eligibleVoters = await getSetting('eligibleVoters', 6000000);
 
     // Optimized: Use MongoDB aggregation for regional turnout to prevent memory bottlenecks
     const turnoutData = await BlockModel.aggregate([
@@ -515,7 +521,13 @@ async function startServer() {
       { time: '17:00', count: totalWeightedVotes },
     ];
 
-    statsCache = { regionalTurnout, turnoutTrend };
+    statsCache = { 
+      regionalTurnout, 
+      turnoutTrend, 
+      eligibleVoters, 
+      totalWeightedVotes,
+      remainingVotes: Math.max(0, eligibleVoters - totalWeightedVotes)
+    };
     res.json(statsCache);
   });
 
@@ -544,6 +556,7 @@ async function startServer() {
      const view = String(req.query.view || '');
      
      const isResultsPublished = await getSetting('isResultsPublished', false);
+     const eligibleVoters = await getSetting('eligibleVoters', 6000000);
      // Use cached results for standard users to prevent DB thrashing
      if (resultsCache && role !== 'admin' && isResultsPublished) return res.json(resultsCache);
 
@@ -571,6 +584,7 @@ async function startServer() {
         return res.json({ 
           results: candidates.map(c => ({ ...c, votes: 0 })), 
           totalVotes, 
+          eligibleVoters,
           isVotingOpen, 
           isResultsPublished,
           myVoteStatus: user?.hasVoted ? "Protocol Verification Confirmed" : null,
@@ -588,6 +602,7 @@ async function startServer() {
      const response = { 
        results: resultsList, 
        totalVotes: totalWeight, 
+       eligibleVoters,
        isVotingOpen, 
        isResultsPublished,
        blockchain

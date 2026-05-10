@@ -51,6 +51,9 @@ import {
   AreaChart,
   Area
 } from 'recharts';
+import cityImage from './ciyt3.jpeg';
+import cityMapImage from './city2.jpeg';
+import cityOfficeImage from './city1.jpeg';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import './styles/global.scss';
@@ -578,7 +581,14 @@ const AboutPage = ({ setView, auth, handleLogout, notifications, setShowNotifica
     <TopBar auth={auth} handleLogout={handleLogout} setView={setView} notifications={notifications} setShowNotifications={setShowNotifications} results={results} />
     <div className="max-w-7xl mx-auto px-6 py-12 md:py-24 relative z-10 space-y-12">
       {/* Hero & History Section */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-[#0A0A0F]/80 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-10 md:p-16 shadow-2xl">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-[#0A0A0F]/80 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-10 md:p-16 shadow-2xl overflow-hidden">
+        <div className="w-full h-64 md:h-[400px] rounded-[2rem] overflow-hidden mb-12 border border-white/10 shadow-2xl">
+          <img 
+            src={cityImage} 
+            className="w-full h-full object-contain transition-transform duration-1000" 
+            alt="Metropolis Cityscape"
+          />
+        </div>
         <h2 className="text-4xl md:text-8xl font-black tracking-tighter mb-12 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">Metropolis City: The Future of Sovereignty</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -589,7 +599,7 @@ const AboutPage = ({ setView, auth, handleLogout, notifications, setShowNotifica
               </h3>
               <div className="text-white/70 leading-relaxed space-y-4 text-lg">
                 <p>Founded in 2000 as a tech-hub experiment, Metropolis City has grown into a sovereign Smart-City enclave. The architecture is a blend of neo-futurism and high-density living, powered entirely by renewable energy.</p>
-                <p>The population is approximately 3 million, with a diverse demographic and a strong emphasis on civic engagement and technological innovation. Founded by Robert Langdon, the city maintains an ethos of transparency and sustainability.</p>
+                <p>The population is approximately 8 million, with a diverse demographic and a strong emphasis on civic engagement and technological innovation. Founded by Robert Langdon, the city maintains an ethos of transparency and sustainability.</p>
                 <p>Divided into 5 sectors, Metropolis is renowned for its advanced public transportation system, vertical farming, and GDP estimated at $50 billion.</p>
               </div>
             </section>
@@ -621,7 +631,8 @@ const AboutPage = ({ setView, auth, handleLogout, notifications, setShowNotifica
               <div className="space-y-4">
                 {[
                   { label: 'Founded', val: '2000' },
-                  { label: 'Population', val: '3.1M' },
+                  { label: 'Population', val: '8.0M' },
+                  { label: 'Eligible Voters', val: '6.0M' },
                   { label: 'GDP', val: '$50B' },
                   { label: 'Energy', val: '100% Green' },
                 ].map((s, i) => (
@@ -659,11 +670,11 @@ const AboutPage = ({ setView, auth, handleLogout, notifications, setShowNotifica
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { id: 1, name: 'Sector 1: Central Core', pop: '750k', gdp: '$15.2B', focus: 'Financial & Governance Hub' },
-            { id: 2, name: 'Sector 2: Neon Heights', pop: '600k', gdp: '$10.5B', focus: 'Technological R&D' },
-            { id: 3, name: 'Sector 3: Harbor District', pop: '900k', gdp: '$12.8B', focus: 'Logistics & Global Trade' },
-            { id: 4, name: 'Sector 4: Zen Garden', pop: '450k', gdp: '$6.5B', focus: 'Residential & Wellness' },
-            { id: 5, name: 'Sector 5: Industrial Belt', pop: '300k', gdp: '$5.0B', focus: 'Manufacturing & Energy' },
+            { id: 1, name: 'Sector 1: Central Core', pop: '2.0M', gdp: '$15.2B', focus: 'Financial & Governance Hub' },
+            { id: 2, name: 'Sector 2: Neon Heights', pop: '1.6M', gdp: '$10.5B', focus: 'Technological R&D' },
+            { id: 3, name: 'Sector 3: Harbor District', pop: '2.4M', gdp: '$12.8B', focus: 'Logistics & Global Trade' },
+            { id: 4, name: 'Sector 4: Zen Garden', pop: '1.2M', gdp: '$6.5B', focus: 'Residential & Wellness' },
+            { id: 5, name: 'Sector 5: Industrial Belt', pop: '0.8M', gdp: '$5.0B', focus: 'Manufacturing & Energy' },
           ].map((s) => (
             <div key={s.id} className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] hover:border-emerald-500/30 transition-all group">
               <div className="flex items-center justify-between mb-6">
@@ -761,13 +772,21 @@ const AboutPage = ({ setView, auth, handleLogout, notifications, setShowNotifica
       {/* Map Placeholder */}
       <div className="bg-[#0A0A0F]/80 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-10 md:p-16 shadow-2xl">
         <h3 className="text-xl font-black text-emerald-500 uppercase tracking-[0.3em] mb-8">Metropolis Jurisdiction Map</h3>
-        <div className="aspect-video bg-slate-950 border border-white/5 rounded-[2.5rem] flex flex-col items-center justify-center overflow-hidden relative group">
-          <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <MapPin className="w-16 h-16 text-emerald-500/20 mb-4 animate-bounce" />
-          <span className="text-white/20 font-black uppercase tracking-widest text-center px-6">
-            Sovereign Enclave Coordinates: 40.7128° N, 74.0060° W<br/>
-            [ Map Layer Provision Active ]
-          </span>
+        <div className="aspect-video bg-slate-950 border border-white/5 rounded-[2.5rem] overflow-hidden relative group">
+          <img 
+            src={cityMapImage} 
+            className="w-full h-full object-contain opacity-30 group-hover:opacity-50 transition-all duration-700" 
+            alt="Jurisdiction Map" 
+          />
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-6 text-center">
+            <MapPin className="w-16 h-16 text-emerald-500 mb-4 animate-bounce shadow-2xl" />
+            <div className="bg-[#0A0A0F]/80 backdrop-blur-xl px-8 py-4 rounded-3xl border border-white/10 shadow-2xl">
+              <p className="text-white font-black uppercase tracking-widest leading-relaxed">
+                Sovereign Enclave Coordinates: 40.7128° N, 74.0060° W<br/>
+                [ Map Layer Provision Active ]
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -853,17 +872,16 @@ const ContactPage = ({ setView, auth, handleLogout, notifications, setShowNotifi
                  <div className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-2xl"><MapPin className="w-6 h-6 text-purple-500" /></div>
                  <div>
                     <h4 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Head Office</h4>
-                    <p className="text-lg font-bold leading-tight">Nexus Center, Floor 88<br/>Metropolis Core, Sector 1</p>
+                    <p className="text-lg font-bold leading-tight">Nexus Center, Robitson Street<br/>Metropolis Core, Sector 5</p>
                  </div>
               </div>
            </div>
-           <div className="bg-white/5 border border-white/10 rounded-[2rem] overflow-hidden p-1 text-center">
-              <div className="bg-slate-950/50 w-full h-full rounded-[1.8rem] flex items-center justify-center p-8">
-                <div>
-                   <MapPin className="w-12 h-12 text-white/20 mx-auto mb-4" />
-                   <p className="text-xs font-black uppercase tracking-widest text-white/30">Google Maps Integration<br/>[ Sector 1 Core Location ]</p>
-                </div>
-              </div>
+           <div className="bg-white/5 border border-white/10 rounded-[2rem] overflow-hidden p-1 h-64 md:h-auto min-h-[300px] shadow-2xl">
+              <img 
+                src={cityOfficeImage} 
+                className="w-full h-full object-contain rounded-[1.8rem] hover:scale-105 transition-transform duration-1000" 
+                alt="Sector 5 Map Location" 
+              />
            </div>
         </div>
 
@@ -1673,9 +1691,15 @@ const VoterResultsView = ({ results, fetchResults, auth, setView, handleLogout, 
             </div>
             <p style={{ color: '#10b981', fontWeight: 900, fontSize: '0.625rem', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0.5rem 0 0 0' }}>Universal Protocol Verification Complete</p>
           </div>
-          <div className="result-card" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '1.5rem', padding: '1rem 2rem', textAlign: 'right', maxWidth: '280px' }}>
-            <span style={{ fontSize: '0.625rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(255,255,255,0.4)', display: 'block', marginBottom: '0.25rem' }}>Total Verified Votes</span>
-            <span style={{ fontSize: '2.25rem', fontWeight: 900, color: 'white' }}>{results.totalVotes}</span>
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <div className="result-card" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '1.5rem', padding: '1rem 2rem', textAlign: 'right', minWidth: '240px' }}>
+              <span style={{ fontSize: '0.625rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(255,255,255,0.4)', display: 'block', marginBottom: '0.25rem' }}>Total Verified Votes</span>
+              <span style={{ fontSize: '2.25rem', fontWeight: 900, color: 'white' }}>{results.totalVotes.toLocaleString()}</span>
+            </div>
+            <div className="result-card" style={{ background: 'rgba(16,185,129,0.05)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '1.5rem', padding: '1rem 2rem', textAlign: 'right', minWidth: '240px' }}>
+              <span style={{ fontSize: '0.625rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#10b981', display: 'block', marginBottom: '0.25rem' }}>Electoral Turnout</span>
+              <span style={{ fontSize: '2.25rem', fontWeight: 900, color: '#10b981' }}>{((results.totalVotes / (results.eligibleVoters || 6000000)) * 100).toFixed(2)}%</span>
+            </div>
           </div>
         </div>
 
@@ -1891,6 +1915,28 @@ const AdminView = ({ results, setResults, auditLog, setAuditLog, loading, setLoa
                </button>
                <p className="text-[9px] font-bold text-white/30 uppercase tracking-widest text-center">Wipes votes and resets user status</p>
             </div>
+          </div>
+        </div>
+
+        {/* Admin Dashboard Stats Summary */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="bg-[#0A0A0F]/80 backdrop-blur-3xl border border-white/10 p-8 rounded-[2.5rem] shadow-xl">
+             <div className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">Eligible Voters</div>
+             <div className="text-3xl font-black text-white">{(stats?.eligibleVoters || 6000000).toLocaleString()}</div>
+          </div>
+          <div className="bg-[#0A0A0F]/80 backdrop-blur-3xl border border-white/10 p-8 rounded-[2.5rem] shadow-xl">
+             <div className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">Weighted Votes</div>
+             <div className="text-3xl font-black text-emerald-500">{(stats?.totalWeightedVotes || 0).toLocaleString()}</div>
+          </div>
+          <div className="bg-[#0A0A0F]/80 backdrop-blur-3xl border border-white/10 p-8 rounded-[2.5rem] shadow-xl">
+             <div className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">Turnout</div>
+             <div className="text-3xl font-black text-blue-500">
+               {stats?.eligibleVoters ? ((stats.totalWeightedVotes / stats.eligibleVoters) * 100).toFixed(2) : '0.00'}%
+             </div>
+          </div>
+          <div className="bg-[#0A0A0F]/80 backdrop-blur-3xl border border-white/10 p-8 rounded-[2.5rem] shadow-xl border-amber-500/20">
+             <div className="text-[10px] font-black text-amber-500/60 uppercase tracking-widest mb-2">Remaining Potential</div>
+             <div className="text-3xl font-black text-amber-500">{(stats?.remainingVotes || 0).toLocaleString()}</div>
           </div>
         </div>
 
