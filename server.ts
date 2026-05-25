@@ -109,7 +109,7 @@ interface Candidate {
 // --- Configuration ---
 // Change this to 1 to revert to standard 1-person-1-vote counting.
 // Current setting: 100 (Each vote counts as 100 in the system).
-const VOTE_MULTIPLIER = 75000;
+const VOTE_MULTIPLIER = 1;
 
 const initialCandidates: Candidate[] = [
   { id: 'c1', name: 'J. Vance', party: 'Republican Party', partyId: 'republican', symbol: '🐘', bio: 'A seasoned diplomat focusing on economic sovereignty.', platform: ['Lower digital transaction taxes', 'Strengthen node infrastructure', 'Energy independence via fusion'], photo: 'https://images.unsplash.com/photo-1540560086596-6f4528bedb02?w=400&h=400&fit=crop', region: 'Sector 1' },
@@ -515,9 +515,9 @@ async function startServer() {
     const totalWeightedVotes = weightTotal[0]?.total || 0;
 
     const turnoutTrend = [
-      { time: '08:00', count: VOTE_MULTIPLIER * 0.3 },
-      { time: '12:00', count: totalWeightedVotes * 0.4 },
-      { time: '14:00', count: totalWeightedVotes * 0.7 },
+      { time: '08:00', count: VOTE_MULTIPLIER * 3 },
+      { time: '12:00', count: totalWeightedVotes * 4 },
+      { time: '14:00', count: totalWeightedVotes * 7 },
       { time: '17:00', count: totalWeightedVotes },
     ];
 

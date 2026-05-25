@@ -2209,9 +2209,7 @@ const BlockchainExplorer = ({ blockchain, setView, auth, setAuth, handleLogout, 
                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <span className="text-[9px] font-black text-white/30 uppercase tracking-[0.4em] mb-4 block">Cryptographic ID</span>
-                    <p className="font-mono text-emerald-500 text-[10px] break-all bg-black/40 p-4 rounded-xl">
-                      {auth.role === 'admin' ? "REDACTED_SECURITY_PROTOCOL_HASH" : b.hash}
-                    </p>
+                    <p className="font-mono text-emerald-500 text-[10px] break-all bg-black/40 p-4 rounded-xl">{b.hash}</p>
                   </div>
                   <div className="bg-emerald-500 rounded-3xl p-8 text-[#020205]">
                     <span className="text-[9px] font-black uppercase tracking-widest opacity-40 block mb-2">Block Details</span>
