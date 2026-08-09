@@ -2,6 +2,7 @@
 
 Metropolis EVoting 2026 is a high-security, blockchain-inspired electronic voting platform designed for the sovereign Smart-City enclave of Metropolis. Built with **TypeScript** on the **MERN** stack (MongoDB, Express, React, Node.js), it ensures electoral integrity through cryptographic hashing, immutable audit logs, and real-time consensus monitoring.
 
+
 ## 🚀 Core Features
 
 ### 🔗 Blockchain-Inspired Ledger
