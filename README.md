@@ -1,3 +1,4 @@
+[![Architecture diagram of spandan2106/metropolis-evoting-2026](https://gitdiagram.com/spandan2106/metropolis-evoting-2026/diagram.png)](https://gitdiagram.com/spandan2106/metropolis-evoting-2026?utm_source=readme&utm_medium=picture)
 # 🏛️ Metropolis EVoting 2026: Sovereign Voting Protocol
 
 Metropolis EVoting 2026 is a high-security, blockchain-inspired electronic voting platform designed for the sovereign Smart-City enclave of Metropolis. Built with **TypeScript** on the **MERN** stack (MongoDB, Express, React, Node.js), it ensures electoral integrity through cryptographic hashing, immutable audit logs, and real-time consensus monitoring.
