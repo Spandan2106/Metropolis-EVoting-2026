@@ -1,3 +1,4 @@
+[![Architecture diagram](https://gitdiagram.com/diagram-badge.svg)](https://gitdiagram.com/spandan2106/metropolis-evoting-2026?utm_source=readme&utm_medium=badge)
 [![Architecture diagram of spandan2106/metropolis-evoting-2026](https://gitdiagram.com/spandan2106/metropolis-evoting-2026/diagram.png)](https://gitdiagram.com/spandan2106/metropolis-evoting-2026?utm_source=readme&utm_medium=picture)
 # 🏛️ Metropolis EVoting 2026: Sovereign Voting Protocol
 
