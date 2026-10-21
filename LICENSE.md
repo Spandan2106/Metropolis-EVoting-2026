@@ -1,6 +1,44 @@
-Apache License
+# ⚖️ License
+
+<p align="center">
+  <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="Apache 2.0 License" />
+  <img src="https://img.shields.io/badge/Open%20Source-Yes-success.svg" alt="Open Source" />
+</p>
+
+**Metropolis-EVoting-2026** is licensed under the **Apache License 2.0**.
+
+Copyright © 2026 Spandan Das
+
+## 📜 License Overview
+
+The Apache License 2.0 is a permissive open-source license that allows users to use, modify, and distribute the software for any purpose, while providing an express grant of patent rights from contributors to users.
+
+### ✅ What You Can Do
+
+- **Commercial Use:** Use the software commercially without restrictions.
+- **Modification:** Freely modify the source code.
+- **Distribution:** Distribute original or modified versions.
+- **Patent Grant:** Receive an express grant of patent rights from contributors.
+- **Private Use:** Modify and run the software privately without sharing changes.
+
+### 📋 Conditions
+
+- **License and Copyright Notice:** Include a copy of the license and copyright notice in all distributions.
+- **State Changes:** Clearly state any significant changes made to the original files.
+- **Notice File:** Include any original `NOTICE` file when distributing derivative works.
+
+### ⚠️ Disclaimer
+
+The software is provided **"AS IS"**, without warranties or conditions of any kind, either express or implied. Contributors or copyright holders are not liable for any damages or claims arising from the use of the software.
+
+---
+
+## 📄 Full Apache License 2.0
+
+```text
+                                 Apache License
                            Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+                        [http://www.apache.org/licenses/](http://www.apache.org/licenses/)
 
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -155,7 +193,7 @@ Apache License
       unless required by applicable law (such as deliberate and grossly
       negligent acts) or agreed to in writing, shall any Contributor be
       liable to You for damages, including any direct, indirect, special,
-      incidental, or consequential damages of any character arising as a
+      incidental, or exemplary damages of any character arising as a
       result of this License or out of the use or inability to use the
       Work (including but not limited to damages for loss of goodwill,
       work stoppage, computer failure or malfunction, or any and all
@@ -186,13 +224,13 @@ Apache License
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [yyyy] [name of copyright owner]
+   Copyright 2026 Spandan Das
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+       [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
